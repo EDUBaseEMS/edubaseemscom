@@ -13,4 +13,4 @@ jobs:
       - name: Setup SSH Agent and Test SSH to AWS
         run: |
           eval $(ssh-agent -s)
-          echo "${{ secrets.MY_TEST_ENV }}"
+          echo "${{ secrets.MY_REPO_TEST_ENV }}"
