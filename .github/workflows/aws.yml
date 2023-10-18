@@ -1,0 +1,16 @@
+name: Test SSH to AWS
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH Agent and Test SSH to AWS
+        run: |
+          eval $(ssh-agent -s)
+          echo "${{ secrets.MY_TEST_ENV }}"
