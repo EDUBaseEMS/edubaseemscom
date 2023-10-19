@@ -1,4 +1,4 @@
-name: Test SSH to AWS
+name: Deploy to EC2
 
 on:
   push:
@@ -6,11 +6,19 @@ on:
       - main
 
 jobs:
-  test-ssh:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH Agent and Test SSH to AWS
-        run: |
-          eval $(ssh-agent -s)
-          echo "${{ secrets.MY_REPO_TEST_ENV }}"
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to EC2
+      env:
+        PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOST: 54.215.21.69
+        USERNAME: ubuntu
+      run: |
+        eval $(ssh-agent -s)
+        echo "$PRIVATE_KEY" | ssh-add -
+        ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "mkdir -p /var/www/test"
