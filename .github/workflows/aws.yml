@@ -21,4 +21,4 @@ jobs:
       run: |
         eval $(ssh-agent -s)
         echo "$PRIVATE_KEY" | ssh-add -
-        ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "mkdir -p /var/www/test12"
+        ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "cd /var/www/adapt-fleet-server && npm install && pm2 restart backend"
