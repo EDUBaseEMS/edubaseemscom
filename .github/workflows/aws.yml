@@ -21,4 +21,4 @@ jobs:
       run: |
         eval $(ssh-agent -s)
         echo "$PRIVATE_KEY" | ssh-add -
-        ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "/home/ubuntu/.nvm/versions/node/v16.16.0/bin/npm install"
+        ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "source ~/.nvm/nvm.sh && nvm use 16.16.0 && cd /var/www/adapt-fleet-server && npm install"
